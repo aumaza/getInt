@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1536020153 source:d:\a. maza - test\getint\main.c
+	<stdio.h>
+	<stdlib.h>
+
