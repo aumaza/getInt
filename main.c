@@ -1,53 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int getInt(char msj[], char error[], int a, int b);
+int getInt(char msj[], char error[], int limInf, int limSup, int intentos);
 
 int main()
 {
-    int min=0;
-    int max=99;
-    char mensaje[20]="Ingrese su edad: ";
-    char msjError[20]="Valor incorrecto";
 
-
-    getInt(mensaje,msjError,min,max);
+    getInt("Ingrese una edad entre 15 y 30: ","Edad fuera de rango, Ingrese nuevamente",15,30, 2);
 
 
     return 0;
 }
 
-int getInt(char msj[], char error[], int a, int b)
+int getInt(char msj[], char error[], int limInf, int limSup, int intentos)
 {
     //int i;
-    int num;
+    int dato;
     int flag=0;
-    int errorAcum=0;
+    //int intentos;
 
 
     printf("\n%s", msj);
-    scanf("%d", &num);
+    scanf("%d", &dato);
 
-    while(num>a && num<=b)
+    while((dato<limInf || dato>limSup) && (intentos>0))
     {
+        printf("\n=======================================");
+        printf("\n%s", error);
+        printf("\n=======================================\n");
+        intentos--;
+
+        printf("\n%s", msj);
+        scanf("%d", &dato);
         flag=1;
-        break;
+
     }
 
+    if(flag==1)
+    {
+        printf("\n=====================================");
+        printf("\nHA EXCEDIDO LA CANTIDAD DE INTENTOS");
+        printf("\n=====================================");
+    }
 
      if(flag==0)
     {
-       do{
-       printf("\n%s", error);
+        printf("\n=====================================");
+        printf("\nUSTED INGRESO: %d", dato);
+        printf("\n=====================================");
 
-       printf("\n\nIngrese su edad: ");
-       scanf("%d", &num);
-
-       errorAcum++;
-
-    }while(errorAcum==3);
     }
-    printf("\nUsted ingreso: %d", num);
 
-return num;
+
+
+return dato;
 }
